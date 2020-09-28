@@ -4,13 +4,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const cors_1 = __importDefault(require("cors"));
 console.log('okay buddy');
 const csv = require('csv-parser');
 const fs = require('fs');
 let results = [];
 let data = '';
 const app = express_1.default();
-const port = 3000;
+app.use(cors_1.default());
+const port = 4000;
 fs.createReadStream('./data.csv')
     .pipe(csv())
     .on('data', (data) => results.push(data))

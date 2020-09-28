@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 
 console.log('okay buddy');
 const csv = require('csv-parser');
@@ -6,7 +7,8 @@ const fs = require('fs');
 let results: string[] = [];
 let data: unknown = '';
 const app = express();
-const port = 3000;
+app.use(cors());
+const port = 4000;
 
 fs.createReadStream('./data.csv')
   .pipe(csv())
