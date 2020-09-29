@@ -4,6 +4,19 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 const api_url = 'http://localhost:4000/';
 
+class Cart extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      tax: 13,
+      total: 0.0,
+    };
+  }
+  render() {
+    return <h1 className='box-field'>Cart</h1>;
+  }
+}
+
 class Items extends React.Component {
   constructor(props) {
     super(props);
@@ -44,7 +57,12 @@ class Items extends React.Component {
         );
       }
     }
-    return <div>{elements}</div>;
+    return (
+      <div>
+        {elements}
+        <Cart />
+      </div>
+    );
   }
 }
 export default Items;
