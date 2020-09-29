@@ -2,10 +2,6 @@ import React from 'react';
 import '../App.css';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-import ListGroup from 'react-bootstrap/ListGroup';
 
 class CardItem extends React.Component {
   constructor(props) {
@@ -14,8 +10,15 @@ class CardItem extends React.Component {
       name: props.name,
       index: props.index,
       cost: props.cost,
+      many: 0,
+      total_cost: 0,
     };
   }
+  addItem() {
+    this.setState({ many: this.state.many + 1 });
+    this.setState({ total_cost: this.state.many * this.state.cost });
+  }
+  deleteItem() {}
   render() {
     return (
       <Card style={{ width: '18rem' }}>
@@ -26,13 +29,7 @@ class CardItem extends React.Component {
             Some quick example text to build on the card title and make up the
             bulk of the card's content.
           </Card.Text>
-          <Button
-            onClick={() => {
-              console.log(this.state.index);
-            }}
-          >
-            +
-          </Button>
+          <Button onClick={() => this.addItem()}>+</Button>
         </Card.Body>
       </Card>
     );
