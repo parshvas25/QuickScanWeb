@@ -1,7 +1,11 @@
 import React from 'react';
 import '../App.css';
-import Card from 'react-bootstrap/Card';
+import CardItem from './Card';
 import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import ListGroup from 'react-bootstrap/ListGroup';
 const api_url = 'http://localhost:4000/';
 
 class Cart extends React.Component {
@@ -10,10 +14,26 @@ class Cart extends React.Component {
     this.state = {
       tax: 13,
       total: 0.0,
+      cart: [],
     };
   }
   render() {
-    return <h1 className='box-field'>Cart</h1>;
+    return (
+      <div>
+        <h1 className='cart-heading'>Cart</h1>
+        <ListGroup>
+          <ListGroup.Item>No style</ListGroup.Item>
+          <ListGroup.Item variant='primary'>Primary</ListGroup.Item>
+          <ListGroup.Item variant='secondary'>Secondary</ListGroup.Item>
+          <ListGroup.Item variant='success'>Success</ListGroup.Item>
+          <ListGroup.Item variant='danger'>Danger</ListGroup.Item>
+          <ListGroup.Item variant='warning'>Warning</ListGroup.Item>
+          <ListGroup.Item variant='info'>Info</ListGroup.Item>
+          <ListGroup.Item variant='light'>Light</ListGroup.Item>
+          <ListGroup.Item variant='dark'>Dark</ListGroup.Item>
+        </ListGroup>
+      </div>
+    );
   }
 }
 
@@ -36,32 +56,32 @@ class Items extends React.Component {
   }
 
   render() {
-    console.log(this.state.response);
     var elements = [];
     if (this.state.response != null) {
       for (var i = 0; i < this.state.response.length; i++) {
         elements.push(
-          <div className='box-field'>
-            <Card style={{ width: '18rem' }}>
-              <Card.Img variant='top' src='holder.js/100px180' />
-              <Card.Body>
-                <Card.Title>{this.state.response[i][' Name']}</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-                <Button variant='primary'>+</Button>
-              </Card.Body>
-            </Card>
-          </div>
+          <CardItem
+            name={this.state.response[i][' Name']}
+            index={i}
+            cost={0}
+          ></CardItem>
         );
       }
     }
     return (
-      <div>
-        {elements}
-        <Cart />
-      </div>
+      <Container fluid>
+        <Row>
+          <Col xs={9}>
+            <Container fluid>
+              <Row>{elements} </Row>
+            </Container>
+          </Col>
+
+          <Col>
+            <Cart />
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }
